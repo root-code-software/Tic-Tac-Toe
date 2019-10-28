@@ -13,7 +13,7 @@ A tic-tac-toe game on the command line where two human players can play against 
 
 # Author
 
-* [izaiasneto4](https://github.com/izaiasneto4)
+* [Izaias Neto](https://github.com/izaiasneto4)
 * [Israel Laguan](https://github.com/Israel-Laguan)
 
 # License
