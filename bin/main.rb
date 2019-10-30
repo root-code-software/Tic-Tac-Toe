@@ -31,7 +31,7 @@ module TicTacToe
     attr_accessor :player1, :player2
     
     def initialize
-      p 'Welcome to Tic Tac Toe'
+      puts 'Welcome to Tic Tac Toe'
 
       names
       rules
@@ -41,20 +41,20 @@ module TicTacToe
     def names
       @player1 = TicTacToe::Player.new
       @player2 = TicTacToe::Player.new
-      p 'Player 1 insert your name:'      
-      @player1.name = gets.chomp.capitalize!
-      p 'Player 2 insert your name:'      
-      @player2.name = gets.chomp.capitalize!
-      p 'Is this ok?:'
-      p "Player One: #{@player1.name}, Player 2: #{@player2.name}"
-      p '(press Y or yes if you agree or press N or no to change the names)'
-      names_completion = gets.chomp.upcase!
+      puts 'Player 1 insert your name:'      
+      @player1.name = gets.chomp
+      puts 'Player 2 insert your name:'      
+      @player2.name = gets.chomp
+      puts 'Is this ok?:'
+      puts "Player One: #{@player1.name.capitalize}, Player 2: #{@player2.name.capitalize}"
+      puts '(press Y or yes if you agree or press N or no to change the names)'
+      names_completion = gets.chomp.upcase
 
       while !check_completion(names_completion)
-        p 'Is this ok?:'
-        p "Player One: #{@player1.name}, Player 2: #{@player2.name}"
-        p '(press Y or yes if you agree or press N or no to change the names)'
-        names_completion = gets.chomp.upcase!
+        puts 'Is this ok?:'
+        puts "Player One: #{@player1.name.capitalize}, Player 2: #{@player2.name.capitalize}"
+        puts '(press Y or yes if you agree or press N or no to change the names)'
+        names_completion = gets.chomp.upcase
       end
     end
 
@@ -62,16 +62,16 @@ module TicTacToe
       if names_completion =='Y' || names_completion =='YES'
         return true
       elsif names_completion == 'N' || names_completion == 'NO'
-        p 'Change the names then'
+        puts 'Change the names then'
         names
         false
       end
     end
 
     def rules
-      p 'Do you want to review the rules?'
-      p '(press Y or yes if you agree)'
-      see_rules = gets.chomp.upcase!
+      puts 'Do you want to review the rules?'
+      puts '(press Y or yes if you agree)'
+      see_rules = gets.chomp.upcase
 
       
       if see_rules == 'Y' || see_rules == 'YES'
@@ -88,13 +88,9 @@ module TicTacToe
     end
 
     def game
-      @board = [
-        ['x', 'o', '-'],
-        ['-', '-', '-'],
-        ['-', '-', '-']
-      ]
-
-      @board.each {|row| p "| #{row[0]} |  | #{row[1]} | | #{row[2]} |"} 
+      
+      this = GameEngine.new
+      this.show_board
 
     end
 
@@ -106,6 +102,31 @@ module TicTacToe
       @player2.name
     end
   end
+end
+
+class GameEngine
+  attr_accessor :board
+  
+  def initialize
+    @board = [
+      ['x', 'o', '-'],
+      ['-', '-', '-'],
+      ['-', '-', '-']
+    ]
+  end
+  # player1 gets X and start first
+  # player2 gets zero
+
+  def show_board
+    @board.each {|row| puts "| #{row[0]} |  | #{row[1]} | | #{row[2]} |"}
+  end
+
+  # def update_board
+
+  # end
+
+
+
 end
 
 game = TicTacToe::UserInterface.new 
