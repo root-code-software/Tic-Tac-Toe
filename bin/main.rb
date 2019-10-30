@@ -115,10 +115,17 @@ module TicTacToe
     end
     
     def ChangePlayer(match, player)
-      puts 'Choose your hand'
-      hand = gets.chomp
+      
+      hand = get_hand
+
       mark = player === @player1.name ? 10 : 0 
       match.update_board(mark, hand)
+    end
+
+    def get_hand      
+      puts 'Choose your hand'
+      hand = gets.chomp
+      hand
     end
 
     def Player1Name
@@ -150,42 +157,50 @@ class GameEngine
   end
 
   def update_board(mark, position)
-    if verify_hand(position)
-      case position
-      when '1'
-        @board[0]=mark
-      when '2'
-        @board[1]=mark
-      when '3'
-        @board[2]=mark
-      when '4'
-        @board[3]=mark
-      when '5'
-        @board[4]=mark
-      when '6'
-        @board[5]=mark
-      when '7'
-        @board[6]=mark
-      when '8'
-        @board[7]=mark
-      when '9'
-        @board[8]=mark
-      else
-        print 'That position don\'t exit'
-        false 
-      end
+
+    is_verified = verify_hand(position)
+    
+    while !is_verified
+      puts 'Choose your hand'
+      position = gets.chomp
+      
+      break if verify_hand(position)
+    end
+    
+    case position
+    when '1'
+      @board[0]=mark
+    when '2'
+      @board[1]=mark
+    when '3'
+      @board[2]=mark
+    when '4'
+      @board[3]=mark
+    when '5'
+      @board[4]=mark
+    when '6'
+      @board[5]=mark
+    when '7'
+      @board[6]=mark
+    when '8'
+      @board[7]=mark
+    when '9'
+      @board[8]=mark
     else
-      raise 'The position is already taken'
+      puts 'That position don\'t exit'
+      false 
     end
     show_board
   end
 
   def verify_hand(position)
     @board.each do |i|
-      if i == position
-        print 'this method is getting triggered'
+      if "#{i}" == position
+        return true
       end
     end
+    puts 'position is occupied or not in the array'
+    return false
   end
 
 
