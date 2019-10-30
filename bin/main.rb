@@ -95,9 +95,15 @@ module TicTacToe
       match.show_board
 
       while turn <= 9
-        if turn >= 5
+        if turn > 5
           # break if verify_win
-          p 'verify the winning'
+          win = match.verify_win
+
+          if win[0]
+            puts "#{win[1] == 10 ? @player1.name : @player2.name} Is the winner"
+          end
+          
+          break if win[0]
         end
         player = check_player(turn)
         puts "Player #{player} is your turn"
@@ -195,7 +201,7 @@ class GameEngine
 
   def verify_hand(position)
     @board.each do |i|
-      if "#{i}" == position
+      if i.to_s == position
         return true
       end
     end
@@ -203,7 +209,30 @@ class GameEngine
     return false
   end
 
+  def verify_win
+    win_tests = [
+      [@board[0],@board[1],@board[2]],
+      [@board[3],@board[4],@board[5]],
+      [@board[6],@board[7],@board[8]],
+      [@board[0],@board[3],@board[6]],
+      [@board[1],@board[4],@board[7]],
+      [@board[2],@board[5],@board[8]],
+      [@board[0],@board[4],@board[8]],
+      [@board[2],@board[4],@board[6]],
+    ]
 
+    is_equal = false
+    mark = 11
+
+    win_tests.each do |test|
+      if test[0] == test[1] && test[0] == test[2]
+        is_equal = true
+        mark = test[0]
+      end
+    end
+
+    return [is_equal, mark]
+  end
 
 end
 
