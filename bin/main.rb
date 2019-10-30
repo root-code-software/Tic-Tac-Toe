@@ -119,7 +119,6 @@ module TicTacToe
       hand = gets.chomp
       mark = player === @player1.name ? 10 : 0 
       match.update_board(mark, hand)
-      puts "Now its the turn of #{player === @player1.name ? player : @player2.name} to play"
     end
 
     def Player1Name
@@ -138,8 +137,6 @@ class GameEngine
   def initialize
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
-  # player1 gets X and start first
-  # player2 gets zero
 
   def show_board    
     puts " #{ @board[0] == 10? 'X' : @board[0] } | #{ @board[1] == 10? 'X' : @board[1] } | #{ @board[2] == 10? 'X' : @board[2] }"
@@ -153,7 +150,6 @@ class GameEngine
   end
 
   def update_board(mark, position)
-    puts "#{position}"
     if verify_hand(position)
       case position
       when '1'
@@ -175,7 +171,8 @@ class GameEngine
       when '9'
         @board[8]=mark
       else
-        raise 'That position don\'t exit'
+        print 'That position don\'t exit'
+        false 
       end
     else
       raise 'The position is already taken'
@@ -184,10 +181,9 @@ class GameEngine
   end
 
   def verify_hand(position)
-
     @board.each do |i|
       if i == position
-        true
+        print 'this method is getting triggered'
       end
     end
   end
