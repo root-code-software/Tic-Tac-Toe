@@ -89,9 +89,35 @@ module TicTacToe
 
     def game
       
-      this = GameEngine.new
-      # this.update_board(10, 3)
-      this.update_board(0, 8)
+      match = GameEngine.new
+      
+      turn = 1
+      match.show_board
+
+      while turn <= 5
+        player = check_player(turn)
+        puts "Player #{player} is your turn"
+        ChangePlayer(match, player)
+        turn += 1
+        # break if verify_win
+      end
+
+    end
+
+    def check_player(turn=0)
+      if turn.odd?
+        @player1.name
+      else
+        @player2.name
+      end
+    end
+    
+    def ChangePlayer(match, player)
+      puts 'Choose your hand'
+      hand = gets.chomp
+      mark = player === @player1.name ? 10 : 0 
+      match.update_board(mark, hand)
+      puts "Now its the turn of #{player === @player1.name ? player : @player2.name} to play"
     end
 
     def Player1Name
@@ -108,7 +134,7 @@ class GameEngine
   attr_accessor :board
   
   def initialize
-    @board = [1, 2, 3, 4, 10, 6, 7, 8, 9]
+    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   end
   # player1 gets X and start first
   # player2 gets zero
@@ -126,25 +152,26 @@ class GameEngine
   end
 
   def update_board(mark, position)
+    puts "#{position}"
     if verify_hand(position)
       case position
-      when 1
+      when '1'
         @board[0]=mark
-      when 2
+      when '2'
         @board[1]=mark
-      when 3
+      when '3'
         @board[2]=mark
-      when 4
+      when '4'
         @board[3]=mark
-      when 5
+      when '5'
         @board[4]=mark
-      when 6
+      when '6'
         @board[5]=mark
-      when 7
+      when '7'
         @board[6]=mark
-      when 8
+      when '8'
         @board[7]=mark
-      when 9
+      when '9'
         @board[8]=mark
       else
         raise 'That position don\'t exit'
