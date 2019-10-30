@@ -94,14 +94,16 @@ module TicTacToe
       turn = 1
       match.show_board
 
-      while turn <= 5
+      while turn <= 9
+        if turn >= 5
+          # break if verify_win
+          p 'verify the winning'
+        end
         player = check_player(turn)
         puts "Player #{player} is your turn"
         ChangePlayer(match, player)
-        turn += 1
-        # break if verify_win
+        turn += 1        
       end
-
     end
 
     def check_player(turn=0)
@@ -140,10 +142,9 @@ class GameEngine
   # player2 gets zero
 
   def show_board    
-    p " #{ @board[0] == 10? 'X' : @board[0] } | #{@board[1] == 10? 'X' : @board[1] } | #{ @board[2]== 10? 'X' : @board[2] }"
-    p " #{ @board[3] == 10? 'X' : @board[3] } | #{@board[4] == 10? 'X' : @board[4]} | #{ @board[5] == 10? 'X' : @board[5] }"
-    p " #{ @board[6]== 10? 'X' : @board[6] } | #{@board[7] == 10? 'X' : @board[7]} | #{ @board[8]== 10? 'X' : @board[8] }"
-
+    puts " #{ @board[0] == 10? 'X' : @board[0] } | #{ @board[1] == 10? 'X' : @board[1] } | #{ @board[2] == 10? 'X' : @board[2] }"
+    puts " #{ @board[3] == 10? 'X' : @board[3] } | #{ @board[4] == 10? 'X' : @board[4] } | #{ @board[5] == 10? 'X' : @board[5] }"
+    puts " #{ @board[6] == 10? 'X' : @board[6] } | #{ @board[7] == 10? 'X' : @board[7] } | #{ @board[8] == 10? 'X' : @board[8] }"
   end
 
   def reset_board
