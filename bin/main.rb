@@ -109,21 +109,51 @@ class GameEngine
   
   def initialize
     @board = [
-      ['x', 'o', '-'],
-      ['-', '-', '-'],
-      ['-', '-', '-']
-    ]
+      [1, 2, 3],
+      [4, 10, 6],
+      [7, 8, 9]    ]
   end
   # player1 gets X and start first
   # player2 gets zero
 
   def show_board
-    @board.each {|row| puts "| #{row[0]} |  | #{row[1]} | | #{row[2]} |"}
+    @board.each {|row| puts "| #{row[0]==10? 'X': row[0]} |  | #{row[1]==10? 'X': row[1]} | | #{row[2]==10? 'X': row[2]} |"}
   end
 
-  # def update_board
+  def update_board(mark, position)
+    if verify_hand(position)
+      case position
+      when 1
+        @board[0][0]=mark
+      when 2
+        @board[0][1]=mark
+      when 3
+        @board[0][2]=mark
+      when 4
+        @board[1][0]=mark
+      when 5
+        @board[1][1]=mark
+      when 6
+        @board[1][2]=mark
+      when 7
+        @board[2][0]=mark
+      when 8
+        @board[2][1]=mark
+      when 9
+        @board[2][2]=mark
+      else
+        raise 'That position don\'t exit'
+      end
+    else
+      raise 'The position is already taken'
+    end
+  end
 
-  # end
+  def verify_hand(position)
+   
+    
+    return false
+  end
 
 
 
