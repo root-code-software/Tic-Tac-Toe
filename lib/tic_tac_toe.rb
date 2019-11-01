@@ -15,8 +15,16 @@ module TicTacToe
       @player2 = player2
     end
 
-    def board
+    def show_board
       @board
+    end
+
+    def player1_name
+      @player1
+    end
+
+    def player2_name
+      @player2
     end
 
     def reset_board
@@ -27,10 +35,38 @@ module TicTacToe
       position = position.to_i
       if position.between?(1, 9)
         @board[position - 1] = mark
-        p @board
         return true
       end
       false
+    end
+
+    def verify_hand(position)
+      @board.each do |i|
+        return true if i.to_s == position
+      end
+      false
+    end
+
+    def verify_win
+      win_tests = [
+        [@board[0], @board[1], @board[2]],
+        [@board[3], @board[4], @board[5]],
+        [@board[6], @board[7], @board[8]],
+        [@board[0], @board[3], @board[6]],
+        [@board[1], @board[4], @board[7]],
+        [@board[2], @board[5], @board[8]],
+        [@board[0], @board[4], @board[8]],
+        [@board[2], @board[4], @board[6]]
+      ]
+      is_equal = false
+      mark = 11
+      win_tests.each do |test|
+        next unless test[0] == test[1] && test[0] == test[2]
+
+        is_equal = true
+        mark = test[0]
+      end
+      [is_equal, mark]
     end
   end
 end

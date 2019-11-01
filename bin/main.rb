@@ -1,55 +1,51 @@
 
-require_relative '../lib/tic_tac_toe.rb'
-
-def verify_hand
-  loop do
-    def verify_hand(position)
-      @board.each do |i|
-        return true if i.to_s == position
-      end
-      puts 'position is occupied or not in the array'
-      false
-    end  
-  end
-end
+require_relative '../lib/tic_tac_toe.rb' 
 
 def ask_input(message)
-  p message
+  puts message
   result= gets.chomp
   result
 end
 
-def player_action(turn)
-  player = check_player(turn)
-  print "Player #{player} is your turn"
-  position = ask_input('Choose your hand')
-  mark = player == @player1 ? 10 : 0
+def show_board(board)
+  puts " #{board[0] == 10 ? 'X' : board[0]} | #{board[1] == 10 ? 'X' : board[1]} | #{board[2] == 10 ? 'X' : board[2]}"
+  puts " #{board[3] == 10 ? 'X' : board[3]} | #{board[4] == 10 ? 'X' : board[4]} | #{board[5] == 10 ? 'X' : board[5]}"
+  puts " #{board[6] == 10 ? 'X' : board[6]} | #{board[7] == 10 ? 'X' : board[7]} | #{board[8] == 10 ? 'X' : board[8]}"
+end
 
-  is_verified = verify_hand(position)
+def player_action(turn, game)
+  player = check_player(turn, game)
+  puts "Player #{player} is your turn"
+  position = ask_input('Choose your hand')
+  mark = player == game.player1_name ? 10 : 0
+
+  is_verified = game.verify_hand(position)
   until is_verified
     position = ask_input('Choose your hand')
-    break if verify_hand(position)
+    break if game.verify_hand(position)
   end
-  update_board(mark, position)
+  game.update_board(mark, position)
+  show_board(game.show_board)
 end
 
 
-def check_player(turn = 0)
+def check_player(turn = 0, game)
   if turn.odd?
-    @player1
+    game.player1_name
   else
-    @player2
+    game.player2_name
   end
 end
 
-def game_loop
+def game_loop(game)
+  show_board(game.show_board)
   turn = 1
   while turn < 10
-    player_action(turn)
+    player_action(turn, game)
 
-    if turn > 5
-      win = verify_win
-      winer = win[1] == 10 ? @player1 : @player2
+    if turn > 4
+      win = game.verify_win
+      winer = win[1] == 10 ? game.player1_name : game.player2_name
       if win[0]
         return win[0]
         break
@@ -120,5 +116,4 @@ game = TicTacToe::GameEngine.new(names[0], names[1])
 
 show_rules
 
-game_loop()
-
+game_loop(game)
