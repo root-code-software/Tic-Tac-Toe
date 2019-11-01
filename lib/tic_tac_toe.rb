@@ -15,6 +15,10 @@ module TicTacToe
       @player2 = player2
     end
 
+    def board
+      @board
+    end
+
     def reset_board
       @board = [1, 2, 3, 4, 10, 6, 7, 8, 9]
     end

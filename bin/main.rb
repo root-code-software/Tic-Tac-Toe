@@ -1,6 +1,66 @@
 
 require_relative '../lib/tic_tac_toe.rb'
 
+def verify_hand
+  loop do
+    def verify_hand(position)
+      @board.each do |i|
+        return true if i.to_s == position
+      end
+      puts 'position is occupied or not in the array'
+      false
+    end  
+  end
+end
+
+def ask_input(message)
+  p message
+  result= gets.chomp
+  result
+end
+
+def player_action(turn)
+  player = check_player(turn)
+  print "Player #{player} is your turn"
+  position = ask_input('Choose your hand')
+  mark = player == @player1 ? 10 : 0
+
+  is_verified = verify_hand(position)
+  until is_verified
+    position = ask_input('Choose your hand')
+    break if verify_hand(position)
+  end
+  update_board(mark, position)
+end
+
+
+def check_player(turn = 0)
+  if turn.odd?
+    @player1
+  else
+    @player2
+  end
+end
+
+def game_loop
+  turn = 1
+  while turn < 10
+    player_action(turn)
+
+    if turn > 5
+      win = verify_win
+      winer = win[1] == 10 ? @player1 : @player2
+      if win[0]
+        return win[0]
+        break
+      end
+    end
+
+    turn += 1
+    false if turn == 10
+  end
+end
+
 def welcome
   puts 'Welcome to Tic Tac Toe'
 end
@@ -60,9 +120,5 @@ game = TicTacToe::GameEngine.new(names[0], names[1])
 
 show_rules
 
-# def verify_hand
-#   loop do
-#     return unless verify_hand
-#     game.ask_hand # It changes player automatically
-#   end
-# end
+game_loop()
+
