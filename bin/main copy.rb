@@ -94,15 +94,7 @@ module TicTacToe
       this=GameEngine.new(@player1.name, @player2.name)
     end
 
-    def check_completion(names_completion)
-      if names_completion =='Y' || names_completion =='YES'
-        return true
-      elsif names_completion == 'N' || names_completion == 'NO'
-        puts 'Change the names then'
-        names
-        false
-      end
-    end
+    
 
   end
 end
