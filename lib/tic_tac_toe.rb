@@ -2,9 +2,8 @@
 
 module TicTacToe
   class UserInterface
-
   end
-
+  
   class GameEngine
     attr_accessor :board, :player1, :player2
 
