@@ -47,18 +47,49 @@ def game_loop(game)
       win = game.verify_win
       winer = win[1] == 10 ? game.player1_name : game.player2_name
       if win[0]
-        return win[0]
-        break
+        puts "#{winer} is the winer of the game!!"
+        is_replay = replay
+        if is_replay
+          turn = 1
+          game.reset_board
+          show_board(game.show_board)
+        else
+          return win[0]
+          break
+        end
       end
     end
 
     turn += 1
-    false if turn == 10
+    if turn == 10
+      puts 'Is a draw'
+      is_replay = replay
+      if is_replay
+        turn = 1
+        game.reset_board
+        show_board(game.show_board)
+      else
+        return false
+        break
+      end
+    end
   end
 end
 
 def welcome
   puts 'Welcome to Tic Tac Toe'
+end
+
+def replay
+  puts 'Do you wanna continue'
+  puts '(press Y or yes if you agree to continue with a new game or press N or finnish)'
+  response = gets.chomp.upcase
+  if response =='Y' || response =='YES'
+    return true
+  elsif response == 'N' || response == 'NO'
+    puts 'We wait you come later to play with us'
+    false
+  end
 end
 
 def get_names
