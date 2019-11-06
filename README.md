@@ -15,7 +15,7 @@ Build a tic-tac-toe game on the command line where two human players can play ag
 
  * Be sure that you have `ruby`installed, you can check using `ruby --version`:
 
-![version](ruby-version.png)
+![version](assets/ruby-version.png)
 
  * Clone the repository 
 ```
@@ -31,22 +31,22 @@ cd Tic-Tac-Toe
 
 * Starting the game
 
-![welcome](ruby.png)
+![welcome](assets/ruby.png)
 
 * Set your names
 
-![names](chomp.png)
+![names](assets/chomp.png)
 
 * You will see the board, its made with numbers portraying the available spaces.
 You can choose one of the numbers where your mark will be placed
 
-![board](board.png)
+![board](assets/board.png)
 
-![plating](playing.png)
+![plating](assets/playing.png)
 
 * When someone get 3 in a row you win and the game ends
 
-![win](win.png)
+![win](assets/win.png)
 
 * You can enjoy any number of times
 
@@ -66,7 +66,7 @@ You can choose one of the numbers where your mark will be placed
 * *Rubocop* for code linting
 * Tests using `RSpec`
 
-![tests](tests.png)
+![tests](assets/tests.png)
 
 # Authors
 * 🇧🇷 [Izaias Neto](https://www.github.com/izaiasneto4)
