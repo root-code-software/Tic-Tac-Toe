@@ -28,7 +28,11 @@ module TicTacToe
       @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     end
 
-    def update_board(mark, position)
+    def update_board(mark, position = nil)
+      return false unless mark == 10 || mark == 0
+      return false if position.nil?
+      return false unless position.is_a?(Numeric)
+
       position = position.to_i
       if position.between?(1, 9)
         @board[position - 1] = mark
