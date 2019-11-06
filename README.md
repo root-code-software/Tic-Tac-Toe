@@ -64,12 +64,14 @@ You can choose one of the numbers where your mark will be placed
 * Use `requiere_relative` for call code from another file
 * `p`, `puts` and `get chomps` for user output and interaction
 * *Rubocop* for code linting
+* Tests using `RSpec`
+
+![tests](tests.png)
 
 # Authors
-🇧🇷 [Izaias Neto](https://www.github.com/izaiasneto4)
-🇨🇴🇸🇻 [Israel Laguan](https://www.github.com/Israel-Laguan)
+* 🇧🇷 [Izaias Neto](https://www.github.com/izaiasneto4)
+* 🇨🇴🇸🇻 [Israel Laguan](https://www.github.com/Israel-Laguan)
 
 # License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details 
-

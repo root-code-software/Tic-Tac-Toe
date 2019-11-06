@@ -3,8 +3,8 @@
 require_relative '../lib/tic_tac_toe.rb'
 
 RSpec.describe TicTacToe::GameEngine do
-  let(:game) { TicTacToe::GameEngine.new('Israel', 'Izaias')}
-  let(:board) {  [1, 2, 3, 4, 5, 6, 7, 8, 9] }
+  let(:game) { TicTacToe::GameEngine.new('Israel', 'Izaias') }
+  let(:board) { [1, 2, 3, 4, 5, 6, 7, 8, 9] }
 
   describe '#player1_name' do
     context 'Shows the correct name of player 1' do
@@ -71,17 +71,158 @@ RSpec.describe TicTacToe::GameEngine do
 
     context 'Incorrect mark input' do
       it 'if mark is not 0 or 10' do
-        expect(game.update_board(String, 1)).to eq(false)
-        expect(game.update_board(Array, 1)).to eq(false)
-        expect(game.update_board(Symbol, 1)).to eq(false)
         expect(game.update_board(5, 1)).to eq(false)
+      end
+      
+      it 'mark is string' do
+        expect(game.update_board(String, 1)).to eq(false)
+      end
+      
+      it 'mark is array' do
+        expect(game.update_board(Array, 1)).to eq(false)
+      end
+      
+      it 'mark is Symbol' do
+        expect(game.update_board(Symbol, 1)).to eq(false)
       end
     end
 
     context 'Correct mark input (10 or 0)' do
-      it 'if mark is a 0 or 10' do
-        expect(game.update_board(10, 1)).to eq(true)
+      it 'if mark is a 0' do
         expect(game.update_board(0, 1)).to eq(true)
+      end
+
+      it 'if mark is a 10' do
+        expect(game.update_board(10, 1)).to eq(true)
+      end
+    end
+  end
+
+  describe '#verify_hand' do
+    context 'Return false if' do
+      it 'position is Numeric' do
+        expect(game.verify_hand(Numeric)).to eq(false)
+      end
+      
+      it 'position is Array' do
+        expect(game.verify_hand(Array)).to eq(false)
+      end
+      
+      it 'position is Symbol' do
+        expect(game.verify_hand(Symbol)).to eq(false)
+      end
+
+      it 'position is smaller than board size' do
+        expect(game.verify_hand('0')).to eq(false)
+      end
+
+      it 'position is bigger than board size' do
+        expect(game.verify_hand('10')).to eq(false)
+      end
+    end
+
+    context 'Return true with correct input' do
+      it do
+        expect(game.verify_hand('9')).to eq(true)
+      end
+    end
+  end
+
+  describe '#verify_win' do
+    context 'return' do
+      it 'an array' do
+        expect(game.verify_win).to be_an(Array)
+      end
+
+      it 'an array of length 2' do
+        expect(game.verify_win.length).to eq(2)
+      end
+    end
+
+    context 'not showing a win' do
+      it 'its starting' do
+        game.reset_board
+        expect(game.verify_win).to eq([false, 11])
+      end
+
+      it 'when there is a tie' do
+        game.reset_board
+        game.update_board(0,1)
+        game.update_board(10,2)
+        game.update_board(0,3)
+        game.update_board(10,4)
+        game.update_board(0,5)
+        game.update_board(10,9)
+        game.update_board(0,8)
+        game.update_board(10,7)
+        game.update_board(0,6)
+        expect(game.verify_win).to eq([false, 11])
+      end
+    end
+
+    context 'Check all winning situations' do
+      it 'First Row' do
+        game.reset_board
+        game.update_board(0,1)
+        game.update_board(0,2)
+        game.update_board(0,3)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'Second Row' do
+        game.reset_board
+        game.update_board(0,4)
+        game.update_board(0,5)
+        game.update_board(0,6)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'Third Row' do
+        game.reset_board
+        game.update_board(0,7)
+        game.update_board(0,8)
+        game.update_board(0,9)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'First Column' do
+        game.reset_board
+        game.update_board(0,1)
+        game.update_board(0,4)
+        game.update_board(0,7)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'Second Column' do
+        game.reset_board
+        game.update_board(0,2)
+        game.update_board(0,5)
+        game.update_board(0,8)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'Third Column' do
+        game.reset_board
+        game.update_board(0,3)
+        game.update_board(0,6)
+        game.update_board(0,9)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'First Diagonal' do
+        game.reset_board
+        game.update_board(0,1)
+        game.update_board(0,5)
+        game.update_board(0,9)
+        expect(game.verify_win).to eq([true, 0])
+      end
+
+      it 'Second Diagonal' do
+        game.reset_board
+        game.update_board(0,3)
+        game.update_board(0,5)
+        game.update_board(0,7)
+        expect(game.verify_win).to eq([true, 0])
       end
     end
   end
