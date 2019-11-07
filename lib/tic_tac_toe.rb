@@ -28,9 +28,14 @@ module TicTacToe
       @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     end
 
-    def update_board(mark, position)
+    def update_board(mark, position = nil)
+      return false if position.nil?
+      return false unless position.is_a?(Numeric)
+
       position = position.to_i
       if position.between?(1, 9)
+        return false unless [0, 10].include?(mark)
+
         @board[position - 1] = mark
         return true
       end
@@ -38,6 +43,8 @@ module TicTacToe
     end
 
     def verify_hand(position)
+      return false unless position.is_a?(String)
+
       @board.each do |i|
         return true if i.to_s == position
       end
