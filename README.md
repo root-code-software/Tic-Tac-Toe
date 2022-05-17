@@ -180,7 +180,7 @@ Icons from:
 [![License][badge-license]](http://badges.mit-license.org)
 
 📝 This project is licensed under the [MIT](LICENSE)\
-Feel free to fork this project and improve it - see the [LICENSE.md](LICENSE.md) file for details 
+Feel free to fork this project and improve it - see the [LICENSE](LICENSE) file for details 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [contributors-shield]: https://img.shields.io/github/contributors/Israel-Laguan/Tic-Tac-Toe?style=for-the-badge
