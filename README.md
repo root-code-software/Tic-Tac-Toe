@@ -20,8 +20,6 @@
 
   <p align="center">
     <br />
-	  🖊️
-    <a href="https://">Read the article</a>
     🐞
     <a href="https://github.com/Israel-Laguan/Tic-Tac-Toe/issues">Report a Bug</a>
     🙋‍♂️
